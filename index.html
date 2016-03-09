@@ -32,7 +32,10 @@
 <a id="intelliservo" class="anchor" href="#intelliservo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IntelliServo</h1>
 
 <p align="center">
-<img src="Doc/Interactive/IntelliServoAssembled.png">
+<iframe width="640" height="480" src="Blender/IntelliServoAssembled.html" frameborder="0" allowfullscreen></iframe>
+<br>
+<br>
+<iframe width="640" height="480" src="Blender/IntelliServoBoard.html" frameborder="0" allowfullscreen></iframe>
 </p>
 
 <h2>
@@ -45,21 +48,16 @@ Multiple servos can now be daisy-chained and controlled over I2C from a microcon
 <p>Each board features an LPC11U24 microcontroller, a DRV8837 motor driver, a TMP36 temperature sensor and a PCA9508 I2C repeater.
 Each servo is unique, and so the list of compatible servos will expand with the community, so don't hesitate to add your servo!</p>
 
-<div>
-<div>
+<br>
 
-<div align="center">
-<a href="https://youtu.be/W2uScJmLD4c" target="_blank"><img src="Doc/Gifs/masterSlave.gif"></a><p align="center"><a href="https://youtu.be/W2uScJmLD4c" target="_blank">Master/Slave configuration</a></p>
-</div>
+<div align="center" ><iframe width="640" height="480" src="https://www.youtube.com/embed/W2uScJmLD4c" frameborder="0" allowfullscreen></iframe></div>
 
-<div align="center">
-<a href="https://youtu.be/FjYgxcrhwy4" target="_blank"><img src="Doc/Gifs/touchDetection.gif"></a>
-<p align="center"><a href="https://youtu.be/FjYgxcrhwy4" target="_blank">Touch detection</a></p>
-</div>
+<br>
 
-<p></p>
-</div>
-</div>
+<div align="center" ><iframe width="640" height="480" src="https://www.youtube.com/embed/FjYgxcrhwy4" frameborder="0" allowfullscreen></iframe></div>
+<br>
+
+
 
 <h2>
 <a id="connections" class="anchor" href="#connections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Connections</h2>
@@ -77,7 +75,7 @@ V_I2C: Voltage reference for the I2C bus and powers components on the auxiliary 
 </ul>
 
 <p align="center">
-<img src="Doc/Connections/Connections.png">
+<img src="images/Connections.png">
 </p>
 
 <h2>
@@ -88,7 +86,7 @@ V_I2C: Voltage reference for the I2C bus and powers components on the auxiliary 
 <p>To compile it use the "mBuino" Mbed platform, which uses the smaller LPC11U24FHI33/301 model instead of the larger LPC11U24FBD64/401 model normally used in other boards. This is important because the EEPROM memory maps are different between both and the board won't be able to access the EEPROM until the right platform is chosen.</p>
 
 <p align="center">
-<img src="Hardware/3D/IntelliServoHardware.png">
+<img src="images/IntelliServoHardware.png">
 </p>
 
 <h2>
