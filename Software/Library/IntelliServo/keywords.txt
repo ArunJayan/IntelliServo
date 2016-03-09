@@ -1,0 +1,8 @@
+IntelliServo		KEYWORD1
+changeAddress  		KEYWORD2
+disable			KEYWORD2
+writeAngle		KEYWORD2
+readAngle		KEYWORD2
+readCurrent		KEYWORD2
+readTemp		KEYWORD2
+
