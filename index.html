@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Intelliservo by alvaroferran</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Intelliservo</h1>
+        <h2></h2>
+        <a href="https://github.com/alvaroferran/IntelliServo" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="intelliservo" class="anchor" href="#intelliservo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IntelliServo</h1>
+
+<p align="center">
+<img src="Doc/Interactive/IntelliServoAssembled.png">
+</p>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>IntelliServo is a project aiming to transform regular hobby servos into intelligent ones by replacing their original boards. 
+By doing so the servo has upgraded capabilities, such as being able to read its position, temperature and current consumption. 
+Multiple servos can now be daisy-chained and controlled over I2C from a microcontroller, or over USB from a computer.</p>
+
+<p>Each board features an LPC11U24 microcontroller, a DRV8837 motor driver, a TMP36 temperature sensor and a PCA9508 I2C repeater.
+Each servo is unique, and so the list of compatible servos will expand with the community, so don't hesitate to add your servo!</p>
+
+<div>
+<div>
+
+<div align="center">
+<a href="https://youtu.be/W2uScJmLD4c" target="_blank"><img src="Doc/Gifs/masterSlave.gif"></a><p align="center"><a href="https://youtu.be/W2uScJmLD4c" target="_blank">Master/Slave configuration</a></p>
+</div>
+
+<div align="center">
+<a href="https://youtu.be/FjYgxcrhwy4" target="_blank"><img src="Doc/Gifs/touchDetection.gif"></a>
+<p align="center"><a href="https://youtu.be/FjYgxcrhwy4" target="_blank">Touch detection</a></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<h2>
+<a id="connections" class="anchor" href="#connections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Connections</h2>
+
+<p>V_BAT: Main power line, energizes the motor and all the servo's ICs. Works between 5 and 12 volts.
+V_I2C: Voltage reference for the I2C bus and powers components on the auxiliary bus. Must be 3.3V or 5V.</p>
+
+<p>The servo has different connector groups:</p>
+
+<ul>
+<li>Main bus (5 lines): It is used to power and control the servos in daisy-chain configuration, attaching each one's A side to the previous' B side.</li>
+<li>Auxiliary bus (4 lines): Its function is to provide an extra link to the I2C bus, to allow other devices to be used at the same time.</li>
+<li>Power bus (2 lines): The main bus can be powered from the power bus on any servo, or from the last servo's main bus V_BAT and GND.</li>
+<li>Micro USB: Used both to upload the firmware to the board as to use it to control the servo directly from the PC, without involving other microcontrollers.</li>
+</ul>
+
+<p align="center">
+<img src="Doc/Connections/Connections.png">
+</p>
+
+<h2>
+<a id="installing-firmware" class="anchor" href="#installing-firmware" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing Firmware</h2>
+
+<p>The board runs the firmware included in the Software/Firmware section. It is written in C++ and uses Mbed, to upload it connect the board over USB and then power it using the V_BAT and GND lines while pressing the button. </p>
+
+<p>To compile it use the "mBuino" Mbed platform, which uses the smaller LPC11U24FHI33/301 model instead of the larger LPC11U24FBD64/401 model normally used in other boards. This is important because the EEPROM memory maps are different between both and the board won't be able to access the EEPROM until the right platform is chosen.</p>
+
+<p align="center">
+<img src="Hardware/3D/IntelliServoHardware.png">
+</p>
+
+<h2>
+<a id="library" class="anchor" href="#library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Library</h2>
+
+<p>The servos are controlled over I2C, but to simplify their use an arduino library with all the relevant functions and some example sketches are included as well. 
+To install it simply copy it to the "sketchbook/libraries/" folder. </p>
+
+<h2>
+<a id="specifications" class="anchor" href="#specifications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Specifications</h2>
+
+<p>V_BAT:     5V-12V
+V_I2C:       3.3V/5V
+I_Servo:    1.8A max
+I_Line:       5A max (60mil trace)</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>This project is open-source and as so everyone is welcome to contribute. The most useful way of doing so is perhaps by expanding the list of compatible servos, by finding the moving range in degrees and PID parameters specific for each servo.</p>
+
+<p>To do so add the servo to the IntelliServoConfig.h file as below</p>
+
+<div class="highlight highlight-source-c++"><pre><span class="pl-c">//Added by username</span>
+#<span class="pl-k">ifdef</span> NAME_OF_SERVO
+    <span class="pl-k">float</span> maxAngle=XXX;
+    <span class="pl-k">float</span> Kp=XXX, Kd=XXX, Ki=XXX;
+#<span class="pl-k">endif</span></pre></div>
+
+<p>and to the IntelliServoMain.cpp file</p>
+
+<div class="highlight highlight-source-c++"><pre><span class="pl-c">//#define NAME_OF_SERVO</span></pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>This project is licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</p>
+
+<p align="center">
+<img src="http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png">
+</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/alvaroferran/IntelliServo/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/alvaroferran/IntelliServo/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/alvaroferran/IntelliServo"></a> is maintained by <a href="https://github.com/alvaroferran">alvaroferran</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
